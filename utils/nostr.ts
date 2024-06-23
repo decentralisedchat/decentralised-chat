@@ -4,6 +4,7 @@ import {
   SimplePool,
   finalizeEvent,
 } from "nostr-tools";
+import { bech32 } from "bech32";
 
 const defaultRelays = [
   "wss://relay.damus.io/",
@@ -51,3 +52,17 @@ export const createApp = async (appName: string) => {
     return {};
   }
 };
+
+export function npubToHex(npubKey: string): string {
+  try {
+    const { prefix, words } = bech32.decode(npubKey);
+    if (prefix !== "npub") {
+      throw new Error("Invalid npub key prefix");
+    }
+    const data = bech32.fromWords(words);
+    return Buffer.from(data).toString("hex");
+  } catch (error) {
+    console.error("Failed to convert npub to hex:", error);
+    return npubKey; // Return original key if conversion fails
+  }
+}

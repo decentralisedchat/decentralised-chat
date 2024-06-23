@@ -34,6 +34,22 @@ const Home: React.FC = () => {
           content="Generate embedding code for Decentralised Nostr Chat app"
         />
         <link rel="icon" href="/favicon.ico" />
+        {publicKey && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                var w = window, d = document;
+                w.decenChat = { appId: ${JSON.stringify(publicKey)} };
+                var e = function() {
+                  var s = document.createElement('script');
+                  s.src = 'https://client.decenchat.com/widget.js';
+                  d.body.appendChild(s);
+                }
+                d.readyState !== 'loading' ? e() : w.addEventListener("DOMContentLoaded", e);
+              `,
+            }}
+          />
+        )}
       </Head>
 
       <Header />
@@ -41,9 +57,9 @@ const Home: React.FC = () => {
         <div className={styles.description}>
           <p>
             Easily integrate a live chat support system into your website with
-            Decentralised Chat. Use your existing public key or create a new one to get
-            started and respond to customer inquiries using any Nostr social media
-            app.
+            Decentralised Chat. Use your existing public key or create a new one
+            to get started and respond to customer inquiries using any Nostr
+            social media app.
           </p>
         </div>
         <PublicKeyInput setPublicKey={setPublicKey} />
