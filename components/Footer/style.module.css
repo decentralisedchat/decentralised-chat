@@ -1,0 +1,26 @@
+.footer {
+  width: 100%;
+  padding: 1rem;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 1rem;
+  position: relative;
+}
+
+.footer .link {
+  color: #fff; /* Dodger Blue color for the link */
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+
+.footer .link:hover {
+  text-decoration: underline;
+}
